@@ -1,11 +1,11 @@
 pipeline {
     agent any
-    
+
     tools {
         jdk 'jdk17'
         maven 'maven3'
     }
-    
+
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
     }
@@ -21,13 +21,13 @@ pipeline {
                 sh "mvn compile"
             }
         }
-        
+
         stage('Test') {
             steps {
                 sh "mvn test"
             }
         }
-        
+
         stage('File System Scan') {
             steps {
                 sh "trivy fs --format table -o trivy-fs-report.html ."
@@ -44,7 +44,7 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 script {
-                  waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
+                  waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
                 }
             }
         }
@@ -90,7 +90,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Verify the Deployment') {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: 'abrahimcse-cluster', contextName: '', credentialsId: 'k8-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://A6B32A6AF6C9CAF59FB52F47B77E531F.gr7.ap-south-1.eks.amazonaws.com') {
@@ -99,6 +99,8 @@ pipeline {
                 }
             }
         }
+
+    }
 
     post {
     always {
@@ -132,7 +134,6 @@ pipeline {
                 attachmentsPattern: 'trivy-image-report.html'
             )
         }
-      }       
+      }
     }
-  }   
-}
+} 
