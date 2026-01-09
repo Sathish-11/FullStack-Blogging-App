@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-               git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/abrahimcse/FullStack-Blogging-App.git'
+               git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/Sathish-11/FullStack-Blogging-App.git'
             }
         }
         stage('Compile') {
@@ -64,21 +64,21 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker build -t abrahimcse/bloggingapp:latest ."
+                            sh "docker build -t sathish1102/bloggingapp:latest ."
                     }
                }
             }
         }
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html abrahimcse/bloggingapp:latest "
+                sh "trivy image --format table -o trivy-image-report.html sathish1102/bloggingapp:latest "
             }
         }
         stage('Push Docker Image') {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker push abrahimcse/bloggingapp:latest"
+                            sh "docker push sathish1102/bloggingapp:latest"
                     }
                }
             }
