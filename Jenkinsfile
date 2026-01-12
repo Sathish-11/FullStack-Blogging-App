@@ -101,7 +101,7 @@ pipeline {
                     credentialsId: 'k8-cred',
                     clusterName: 'abrahimcse-cluster',
                     namespace: 'webapps',
-                    serverUrl: 'https://A6B32A6AF6C9CAF59FB52F47B77E531F.gr7.ap-south-1.eks.amazonaws.com'
+                    serverUrl: 'https://A03FDDF95FC8CAF442F5C326ADA7137E.gr7.ap-south-1.eks.amazonaws.com'
                 ) {
                     sh "kubectl apply -f deployment-service.yaml"
                 }
@@ -114,7 +114,7 @@ pipeline {
                     credentialsId: 'k8-cred',
                     clusterName: 'abrahimcse-cluster',
                     namespace: 'webapps',
-                    serverUrl: 'https://A6B32A6AF6C9CAF59FB52F47B77E531F.gr7.ap-south-1.eks.amazonaws.com'
+                    serverUrl: 'https://A03FDDF95FC8CAF442F5C326ADA7137E.gr7.ap-south-1.eks.amazonaws.com'
                 ) {
                     sh """
                     kubectl get pods -n webapps
