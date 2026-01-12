@@ -103,7 +103,7 @@ pipeline {
                     namespace: 'webapps',
                     serverUrl: 'https://A03FDDF95FC8CAF442F5C326ADA7137E.gr7.ap-south-1.eks.amazonaws.com'
                 ) {
-                    sh "kubectl apply -f deployment-service.yaml"
+                    sh "kubectl apply -f deployment-service.yml"
                 }
             }
         }
