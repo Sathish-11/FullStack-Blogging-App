@@ -35,17 +35,20 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                    sh """
-                    sonar-scanner \
-                    -Dsonar.projectName=bloggingapp \
-                    -Dsonar.projectKey=bloggingapp \
-                    -Dsonar.java.binaries=target
-                    """
+           steps {
+             withSonarQubeEnv('sonar') {
+                withEnv(["PATH+SONAR=${SONAR_SCANNER}/bin"]) {
+                  sh '''
+                      sonar-scanner \
+                      -Dsonar.projectName=bloggingapp \
+                      -Dsonar.projectKey=bloggingapp \
+                      -Dsonar.java.binaries=target
+                  '''
                 }
-            }
+             }
+           }
         }
+
 
         stage('Quality Gate') {
             steps {
