@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bloggingapp
-          image: sathish1102/blogingapp:v1 # Updated image to private DockerHub image
+          image: sathish1102/bloggingapp:v1 # Updated image to private DockerHub image
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
